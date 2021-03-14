@@ -208,7 +208,7 @@ def mainGame(movementInfo):
     # list of lowerpipe
     lowerPipes = [
         {'x': SCREENWIDTH + 200, 'y': newPipe1[1]['y']},
-        {'x': SCREENWIDTH + 200 + (SCREENWIDTH / 2), 'y': newPipe2[1]['y']},
+        {'x': SCREENWIDTH + 200+ (SCREENWIDTH / 2), 'y': newPipe2[1]['y']},
     ]
 
     pipeVelX = -4
@@ -216,12 +216,12 @@ def mainGame(movementInfo):
     # player velocity, max velocity, downward accleration, accleration on flap
     playerVelY    =  -9   # player's velocity along Y, default same as playerFlapped
     playerMaxVelY =  10   # max vel along Y, max descend speed
-    playerMinVelY =  -8   # min vel along Y, max ascend speed
-    playerAccY    =   -100  # players downward accleration
+    playerMinVelY =  -10   # min vel along Y, max ascend speed
+    playerAccY    =   1  # players downward accleration
     playerRot     =  45   # player's rotation
-    playerVelRot  =   5   # angular speed
+    playerVelRot  =  -10   # angular speed
     playerRotThr  =  20   # rotation threshold
-    playerFlapAcc =  -1   # players speed on flapping
+    playerFlapAcc =  -8   # players speed on flapping
     playerFlapped = False # True when player flaps
 
 
@@ -256,7 +256,7 @@ def mainGame(movementInfo):
         for pipe in upperPipes:
             pipeMidPos = pipe['x'] + IMAGES['pipe'][0].get_width() / 2
             if pipeMidPos <= playerMidPos < pipeMidPos + 4:
-                score += 1
+                score += 1000
                 SOUNDS['point'].play()
 
         # playerIndex basex change
