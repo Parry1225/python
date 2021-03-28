@@ -27,3 +27,4 @@ while True:
     t.forward(250)
     time.sleep(1)
     i+=6
+    #000
