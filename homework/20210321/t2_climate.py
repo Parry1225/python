@@ -11,6 +11,5 @@ if a<=10:
     print('太冷')
 elif a>=40:
     print('太熱')
-elif a<40 and a>10:
+else:
     print('舒適')
-
