@@ -44,7 +44,7 @@ def horse(x,y,color):
     t.right(90)
     t.end_fill()
 for i in range(1,11):
-    a=(random.randint(-150,150))
-    b=(random.randint(-150,150))
+    a=(random.randint(-250,250))
+    b=(random.randint(-250,250))
     roof(a,b,color[(random.randint(1,9))])
     horse(a+45,b-53,color[(random.randint(1,9))])
