@@ -34,45 +34,49 @@ def event2(money):
     money=money+moneyy
     print('你撿到了%d塊錢,你現在有%d塊錢'%(moneyy,money))
     return money
-def event3(hp,money,magic,skill):
+def event3(hp,money,magic,skill,meapon,meaponmagic):
     bedman_hp=r.randint(2,10)
     while True:
-        art=r.randint(100,101)
+        art=r.randint(1+meapon,3+meapon)
         maggc=int(input('請問你是否要選擇魔攻1.是2.否'))
         if maggc==1:
-            if magic>=3:
+            if magic>=2:
                 if skill==0:
-                    mag=r.randint(4,8)
+                    mag=r.randint(4++weaponmagic,8+weaponmagic)
                     print('你打了壞人%d滴血'%(mag))
                     bedman_hp-=mag
                     print('壞人剩下%d滴血'%(bedman_hp))
-                    t.sleep(1)
+                    t.sleep(0.2)
                     magic-=1
                 if skill==1:
-                    mag=r.randint(1,2)
-                    print('你打了壞人%d滴血'%(mag))
-                    bedman_hp-=mag
-                    print('壞人剩下%d滴血'%(bedman_hp))
-                    t.sleep(0.5)
-                    mag=r.randint(1,2)
-                    print('你打了壞人%d滴血'%(mag))
-                    bedman_hp-=mag
-                    print('壞人剩下%d滴血'%(bedman_hp))
-                    t.sleep(0.5)
-                    mag=r.randint(1,2)
-                    print('你打了壞人%d滴血'%(mag))
-                    bedman_hp-=mag
-                    print('壞人剩下%d滴血'%(bedman_hp))
-                    t.sleep(0.5)
+                    for i in range(5):
+                        mag=r.randint(1+weaponmagic,2+weaponmagic)
+                        print('你打了壞人%d滴血'%(mag))
+                        bedman_hp-=mag
+                        print('壞人剩下%d滴血'%(bedman_hp))
+                        t.sleep(0.2)
                     magic-=2
+                if skill==2:
+                    for i in range(4):
+                        mag=r.randint(2+weaponmagic,3+weaponmagic)
+                        print('你打了壞人%d滴血'%(mag))
+                        bedman_hp-=mag
+                        print('壞人剩下%d滴血'%(bedman_hp))
+                        t.sleep(0.1)
+                    magic-=2
+            else:
+                print('你打了壞人%d滴血'%(art))
+                bedman_hp-=art
+                print('壞人剩下%d滴血'%(bedman_hp))
+                t.sleep(0.2)
 
 
 
-        elif maggc==2:
+        elif maggc!=1:
             print('你打了壞人%d滴血'%(art))
             bedman_hp-=art
             print('壞人剩下%d滴血'%(bedman_hp))
-            t.sleep(1)
+            t.sleep(0.2)
 
 
         if bedman_hp>0:
@@ -80,19 +84,18 @@ def event3(hp,money,magic,skill):
             print('你剩下%d滴血'%(hp))
             t.sleep(1)
         elif bedman_hp<1:
-            print('you kill bedman')
-            monery=r.randint(10,20)
+            print('you kill badman')
+            monery=r.randint(100,120)
             money+=monery
             print('你得到了%d元，你現在有%d元'%(monery,money))
             break
-    return hp,money,magic,skill
-def store(money,hp,magic,skill):
+    return hp,money,magic,skill,weapon,weaponmagic
+def store(money,hp,magic,skill,weapon,weaponmagic):
     if money>=100:
-        m=input('請選擇你要購買的物品1.生命藥水2.魔法藥水3.魔法技能4.q離開')
+        m=input('請選擇你要購買的物品1.生命藥水2.魔法藥水3.魔法技能4.買武器5.q離開')
         if m=='q':
             print('你來到了商店')
         else:
-            print(m)
             if m=='1':
                 print('你花100塊購買生命藥水')
                 hp+=r.randint(3,6)
@@ -109,27 +112,147 @@ def store(money,hp,magic,skill):
                 if mo=='1':
                     skill=1
                     money-=100
-
-
                 if mo=='2':
                     if money>=150:
                         money-=150
                         skill=2
+
                 if mo=='3':
                     if money>=200:
                         money-=200
                         skill=3
 
+            elif m=='4':
+                w=['ur','ssr','sr','r','n']
+                gvygvft=r.randint(0,4)
+                answe=int(input('請問你要購買1.劍2.法杖'))
+                if answe==1:
+                    answ=int(input('恭喜你抽到了%s武器請問你是否要購買(1.買2.不買)'%(w[gvygvft])))
+                    if answ==1:
+                        if gvygvft == 0:
+                            if money>=1000:
+                                money-=1000
+                                weapon+=5
+
+                        if gvygvft == 1:
+                            if money>=750:
+                                money-=750
+                                weapon+=4
+
+                        if gvygvft == 2:
+                            if money>=500:
+                                money-=500
+                                weapon+=3
+
+                        if gvygvft == 3:
+                            if money>=300:
+                                money-=300
+                                weapon+=2
+
+                        if gvygvft == 4:
+                            if money>=100:
+                                money-=100
+                                weapon+=1
+
+                    elif answ!=1:
+                        print('bye_bye')
+                elif answe==2:
+                    answ=int(input('恭喜你抽到了%s武器請問你是否要購買(1.買2.不買)'%(w[gvygvft])))
+                    if answ==1:
+                        if gvygvft == 0:
+                            if money>=1000:
+                                money-=1000
+                                weaponmagic+=5
+
+                        if gvygvft == 1:
+                            if money>=750:
+                                money-=750
+                                weaponmagic+=4
+
+                        if gvygvft == 2:
+                            if money>=500:
+                                money-=500
+                                weaponmagic+=3
+
+                        if gvygvft == 3:
+                            if money>=300:
+                                money-=300
+                                weaponmagic+=2
+
+                        if gvygvft == 4:
+                            if money>=100:
+                                money-=100
+                                weaponmagic+=1
+
+                    elif answ!=1:
+                        print('bye_bye')
 
 
-    return money,hp,magic,skill
 
+
+    return money,hp,magic,skill,weapon,weaponmagic
+def Boes(hp,money,magic,skill,meapon,meaponmagic,boes_hp):
+
+    while True:
+        art=r.randint(1+meapon,3+meapon)
+        maggc=int(input('請問你是否要選擇魔攻1.是2.否'))
+        if maggc==1:
+            if magic>=3:
+                if skill==0:
+                    mag=r.randint(4++weaponmagic,8+weaponmagic)
+                    print('你打了Boes%d滴血'%(mag))
+                    boes_hp-=mag
+                    print('Boes剩下%d滴血'%(boes_hp))
+                    t.sleep(0.2)
+                    magic-=1
+                if skill==1:
+                    for i in range(5):
+                        mag=r.randint(1+weaponmagic,2+weaponmagic)
+                        print('你打了Boes%d滴血'%(mag))
+                        boes_hp-=mag
+                        print('Boes剩下%d滴血'%(boes_hp))
+                        t.sleep(0.2)
+                    magic-=2
+                if skill==2:
+                    for i in range(4):
+                        mag=r.randint(2+weaponmagic,3+weaponmagic)
+                        print('你打了Boes%d滴血'%(mag))
+                        boes_hp-=mag
+                        print('Boes剩下%d滴血'%(boes_hp))
+                        t.sleep(0.1)
+                    magic-=2
+
+
+
+
+        elif maggc!=1:
+            print('你打了Boes%d滴血'%(art))
+            boes_hp-=art
+            print('Boes剩下%d滴血'%(boes_hp))
+            t.sleep(0.2)
+
+
+        if boes_hp>0:
+            hp-=2
+            print('你剩下%d滴血'%(hp))
+            t.sleep(1)
+        elif boes_hp<1:
+            print('you kill Boes')
+            monerrry=r.randint(500,1000)
+            money+=monerrry
+            print('你得到了%d元，你現在有%d元'%(monerrry,money))
+            break
+    return hp,money,magic,skill,weapon,weaponmagic,boes_hp
 question=str(input('輸入go即可開始遊戲'))
 if question=='go':
     HP=10
-    money=0
+    money=10000000
     magic=2
     skill=0
+    weapon=0
+    weaponmagic=0
+    level=0
+    Boes_HP=50
     while True:
         game=r.randint(1,4)
         if game==1:
@@ -141,11 +264,20 @@ if question=='go':
             game=r.randint(1,4)
 
         if game==3:
-            HP,money,magic,skill=event3(HP,money,magic,skill)
-            game=r.randint(1,4)
+            if level!=10:
+                HP,money,magic,skill,weapon,weaponmagic=event3(HP,money,magic,skill,weapon,weaponmagic)
+                level+=2
+                print(level)
+                game=r.randint(1,4)
+            else:
+                print('Boes來襲')
+                Boes_HP=50
+                HP,money,magic,skill,weapon,weaponmagic,Boes_HP=Boes(HP,money,magic,skill,weapon,weaponmagic,Boes_HP)
+                level+=1
+
 
         if game==4:
-            money,HP,magic,skill=store(money,HP,magic,skill)
+            money,HP,magic,skill,weapon,weaponmagic=store(money,HP,magic,skill,weapon,weaponmagic)
             game=r.randint(1,4)
 
         if HP<1:
