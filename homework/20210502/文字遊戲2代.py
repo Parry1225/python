@@ -38,8 +38,8 @@ def event3(hp,money,magic,skill,meapon,meaponmagic):
     bedman_hp=r.randint(2,10)
     while True:
         art=r.randint(1+meapon,3+meapon)
-        maggc=int(input('請問你是否要選擇魔攻1.是2.否'))
-        if maggc==1:
+        maggc=input('請問你是否要選擇魔攻1.是2.否')
+        if maggc=='1':
             if magic>=2:
                 if skill==0:
                     mag=r.randint(4++weaponmagic,8+weaponmagic)
@@ -72,7 +72,7 @@ def event3(hp,money,magic,skill,meapon,meaponmagic):
 
 
 
-        elif maggc!=1:
+        elif maggc!='1':
             print('你打了壞人%d滴血'%(art))
             bedman_hp-=art
             print('壞人剩下%d滴血'%(bedman_hp))
@@ -82,7 +82,7 @@ def event3(hp,money,magic,skill,meapon,meaponmagic):
         if bedman_hp>0:
             hp-=1
             print('你剩下%d滴血'%(hp))
-            t.sleep(1)
+            t.sleep(0.2)
         elif bedman_hp<1:
             print('you kill badman')
             monery=r.randint(100,120)
@@ -229,7 +229,7 @@ def Boes(hp,money,magic,skill,meapon,meaponmagic,boes_hp):
             print('你打了Boes%d滴血'%(art))
             boes_hp-=art
             print('Boes剩下%d滴血'%(boes_hp))
-            t.sleep(0.2)
+            t.sleep(1)
 
 
         if boes_hp>0:
@@ -251,7 +251,7 @@ if question=='go':
     skill=0
     weapon=0
     weaponmagic=0
-    level=0
+    level=1
     Boes_HP=50
     while True:
         game=r.randint(1,4)
@@ -264,9 +264,11 @@ if question=='go':
             game=r.randint(1,4)
 
         if game==3:
-            if level!=10:
+            Boessee=level%10
+            print(Boessee)
+            if Boessee!=0:
                 HP,money,magic,skill,weapon,weaponmagic=event3(HP,money,magic,skill,weapon,weaponmagic)
-                level+=2
+                level+=1
                 print(level)
                 game=r.randint(1,4)
             else:
