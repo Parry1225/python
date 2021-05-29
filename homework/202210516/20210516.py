@@ -24,14 +24,14 @@ status[0] = 1活著，0死亡
 import random as r
 import time as t
 
-def wrint(sts):
-    path ='output.txt'
+def write(sts):
+    path ='激戰死鬥.txt'
     f=open(path,'w')
     for i in sts:
         f.write(str(i)+"\n")
     f.close()
 def line():
-    path ='output.txt'
+    path ='激戰死鬥.txt'
     f=open(path,'r')
     text=[]
     for line in f:
@@ -79,20 +79,26 @@ def event3(hp,money,magic,skill,meapon,meaponmagic):
                         print('壞人剩下%d滴血'%(bedman_hp))
                         t.sleep(0.1)
                     magic-=2
+                if skill==3:
+                    for i in range(2):
+                        mag=r.randint(10+weapon*3,30+weapon*3)
+                        print('你打了壞人%d滴血'%(mag))
+                        bedman_hp-=mag
+                        print('壞人剩下%d滴血'%(bedman_hp))
+                        t.sleep(0.3)
+                    magic-=2
+
             else:
                 print('你打了壞人%d滴血'%(art))
                 bedman_hp-=art
                 print('壞人剩下%d滴血'%(bedman_hp))
                 t.sleep(0.2)
 
-
-
         elif maggc!='1':
             print('你打了壞人%d滴血'%(art))
             bedman_hp-=art
             print('壞人剩下%d滴血'%(bedman_hp))
             t.sleep(0.2)
-
 
         if bedman_hp>0:
             hp-=1
@@ -258,45 +264,58 @@ def Boes(hp,money,magic,skill,meapon,meaponmagic,boes_hp):
             print('你得到了%d元，你現在有%d元'%(monerrry,money))
             break
     return hp,money,magic,skill,weapon,weaponmagic,boes_hp
+
+#######################################main program###################################
 question=str(input('輸入go即可開始遊戲'))
 if question=='go':
-    HP=10
-    money=10000000
-    magic=2
-    skill=0
-    weapon=0
-    weaponmagic=0
-    level=1
+    sts = line()
+    HP=sts[0]
+    money=sts[1]
+    magic=sts[2]
+    skill=sts[3]
+    weapon=sts[4]
+    weaponmagic=sts[5]
+    level=sts[6]
     Boes_HP=50
+
     while True:
-        game=r.randint(1,4)
-        if game==1:
-            HP=event1(HP)
+        ans = input("Do you want 'c' continue 'q' quit the game:")
+        if ans=='c':
             game=r.randint(1,4)
-
-        if game==2:
-            money = event2(money)
-            game=r.randint(1,4)
-
-        if game==3:
-            Boessee=level%10
-            print(Boessee)
-            if Boessee!=0:
-                HP,money,magic,skill,weapon,weaponmagic=event3(HP,money,magic,skill,weapon,weaponmagic)
-                level+=1
-                print(level)
+            if game==1:
+                HP=event1(HP)
                 game=r.randint(1,4)
-            else:
-                print('Boes來襲')
-                Boes_HP=50
-                HP,money,magic,skill,weapon,weaponmagic,Boes_HP=Boes(HP,money,magic,skill,weapon,weaponmagic,Boes_HP)
-                level+=1
+
+            if game==2:
+                money = event2(money)
+                game=r.randint(1,4)
+
+            if game==3:
+                Boessee=level%10
+                print(Boessee)
+                if Boessee!=0:
+                    HP,money,magic,skill,weapon,weaponmagic=event3(HP,money,magic,skill,weapon,weaponmagic)
+                    level+=1
+                    print(level)
+                    game=r.randint(1,4)
+                else:
+                    print('Boes來襲')
+                    Boes_HP=50
+                    HP,money,magic,skill,weapon,weaponmagic,Boes_HP=Boes(HP,money,magic,skill,weapon,weaponmagic,Boes_HP)
+                    level+=1
 
 
-        if game==4:
-            money,HP,magic,skill,weapon,weaponmagic=store(money,HP,magic,skill,weapon,weaponmagic)
-            game=r.randint(1,4)
+            if game==4:
+                money,HP,magic,skill,weapon,weaponmagic=store(money,HP,magic,skill,weapon,weaponmagic)
+                game=r.randint(1,4)
 
-        if HP<1:
-            print('you died')
+            if HP<1:
+                print('you died')
+                break
+        elif ans == 'q':
+            print('88')
+            sts = [HP, money, magic, skill, weapon, weaponmagic, level]
+            write(sts)
             break
+        else:
+            pass
