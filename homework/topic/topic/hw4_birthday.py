@@ -14,4 +14,4 @@ A.在01行中year 的資料類型是 str?
 B.在03行中born 的資料類型是 float?
 C.在04行中message 的資料類型是 bool?
 '''
-B
+A
